@@ -1,46 +1,45 @@
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
         System.out.println("=================================");
-        System.out.println("UC4 - Maintain Ordered Bogie IDs");
+        System.out.println("UC5 - Preserve Insertion Order of Bogies");
         System.out.println("=================================");
 
-        LinkedList<String> bogies = new LinkedList<>();
+        Set<String> formation = new LinkedHashSet<>();
 
-        bogies.add("Engine");
-        bogies.add("Sleeper");
-        bogies.add("AC");
-        bogies.add("Cargo");
-        bogies.add("Guard");
+        formation.add("Engine");
+        formation.add("Sleeper");
+        formation.add("Cargo");
+        formation.add("Guard");
 
-        System.out.println("\nInitial Train Consist:");
-        printWithBraces(bogies);
+        formation.add("Sleeper");
 
-        bogies.add(2, "Pantry");
+        System.out.println("\nFinal Train Formation:");
+        printWithBraces(formation);
 
-        System.out.println("\nAfter inserting Pantry Car at position 2:");
-        printWithBraces(bogies);
+        System.out.println("\nNote:");
+        System.out.println("LinkedHashSet preserves insertion order and removes duplicates automatically.");
 
-        // Remove first and last bogie
-        bogies.removeFirst();
-        bogies.removeLast();
-
-        System.out.println("\nAfter removing first and last bogie:");
-        printWithBraces(bogies);
-
-        System.out.println("\nUC4 ordered consist maintenance completed.");
+        System.out.println("\nUC5 formation setup complete.");
     }
 
-    public static void printWithBraces(LinkedList<String> list) {
+    public static void printWithBraces(Set<String> set) {
         System.out.print("{ ");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.print(list.get(i));
-            if (i < list.size() - 1)
+
+        int count = 0;
+        int size = set.size();
+
+        for (String b : set) {
+            System.out.print(b);
+            count++;
+            if (count < size)
                 System.out.print(", ");
         }
+
         System.out.println(" }");
     }
 }
