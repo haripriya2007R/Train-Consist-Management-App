@@ -1,5 +1,6 @@
  UC12
 import java.util.*;
+import java.util.stream.Collectors;
 
 UC11
 import java.util.regex.Pattern;
@@ -16,11 +17,29 @@ UC12
     static class GoodsBogie {
         String type;
         String cargo;
+        int capacity;
 
-        GoodsBogie(String type, String cargo) {
+        GoodsBogie(String type, String cargo, int capacity) {
             this.type = type;
             this.cargo = cargo;
+            this.capacity = capacity;
         }
+    }
+
+    public static List<GoodsBogie> filterUsingLoop(List<GoodsBogie> bogies) {
+        List<GoodsBogie> result = new ArrayList<>();
+        for (GoodsBogie b : bogies) {
+            if (b.capacity > 60) {
+                result.add(b);
+            }
+        }
+        return result;
+    }
+
+    public static List<GoodsBogie> filterUsingStream(List<GoodsBogie> bogies) {
+        return bogies.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
@@ -44,11 +63,19 @@ UC11
 main
 
         System.out.println("==========================================");
-        System.out.println("UC12 - Safety Compliance Check for Goods Bogies");
+        System.out.println("UC13 - Performance Comparison (Loops vs Streams)");
         System.out.println("==========================================");
 
+ UC13
+
        
+ main
         List<GoodsBogie> bogies = new ArrayList<>();
+        Random random = new Random();
+
+ UC13
+        for (int i = 0; i < 100000; i++) {
+            bogies.add(new GoodsBogie("Type", "Cargo", random.nextInt(100)));
 
         bogies.add(new GoodsBogie("Cylindrical", "Petroleum"));
         bogies.add(new GoodsBogie("Open", "Coal"));
@@ -58,21 +85,23 @@ main
         System.out.println("\nGoods Bogies in Train:");
         for (GoodsBogie b : bogies) {
             System.out.println(b.type + " -> " + b.cargo);
+main
         }
 
-        boolean isSafe = bogies.stream()
-                .allMatch(b ->
-                        !b.type.equalsIgnoreCase("Cylindrical") ||
-                                b.cargo.equalsIgnoreCase("Petroleum")
-                );
+        long startLoop = System.nanoTime();
+        filterUsingLoop(bogies);
+        long endLoop = System.nanoTime();
 
-        System.out.println("\nSafety Compliance Status: " + isSafe);
+        long startStream = System.nanoTime();
+        filterUsingStream(bogies);
+        long endStream = System.nanoTime();
 
-        if (isSafe) {
-            System.out.println("Train formation is SAFE.");
-        } else {
-            System.out.println("Train formation is NOT SAFE.");
-        }
+ UC13
+        System.out.println();
+        System.out.println("Loop Execution Time (ns): " + (endLoop - startLoop));
+        System.out.println("Stream Execution Time (ns): " + (endStream - startStream));
+        System.out.println();
+        System.out.println("UC13 performance benchmarking completed...");
 
  UC12
         System.out.println("\nUC12 safety validation completed...");
@@ -104,5 +133,6 @@ main
         System.out.println("\nUC10 aggregation completed...");
  main
  main
+main
     }
 }
