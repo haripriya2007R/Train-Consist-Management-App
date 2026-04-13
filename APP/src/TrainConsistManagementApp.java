@@ -1,45 +1,36 @@
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
         System.out.println("=================================");
-        System.out.println("UC5 - Preserve Insertion Order of Bogies");
+        System.out.println("UC11 - Validate Train ID and Cargo Code");
         System.out.println("=================================");
 
-        Set<String> formation = new LinkedHashSet<>();
+        String trainId = "TRN-1234";
+        String cargoCode = "PET-AB";
 
-        formation.add("Engine");
-        formation.add("Sleeper");
-        formation.add("Cargo");
-        formation.add("Guard");
+        String trainRegex = "TRN-\\d{4}";
+        String cargoRegex = "PET-[A-Z]{2}";
 
-        formation.add("Sleeper");
+        Pattern trainPattern = Pattern.compile(trainRegex);
+        Pattern cargoPattern = Pattern.compile(cargoRegex);
 
-        System.out.println("\nFinal Train Formation:");
-        printWithBraces(formation);
+        Matcher trainMatcher = trainPattern.matcher(trainId);
+        Matcher cargoMatcher = cargoPattern.matcher(cargoCode);
 
-        System.out.println("\nNote:");
-        System.out.println("LinkedHashSet preserves insertion order and removes duplicates automatically.");
+        boolean isTrainValid = trainMatcher.matches();
+        boolean isCargoValid = cargoMatcher.matches();
 
-        System.out.println("\nUC5 formation setup complete.");
-    }
+        System.out.println("\nEntered Train ID: " + trainId);
+        System.out.println("Entered Cargo Code: " + cargoCode);
 
-    public static void printWithBraces(Set<String> set) {
-        System.out.print("{ ");
+        System.out.println("\nValidation Results:");
+        System.out.println("Train ID Valid: " + isTrainValid);
+        System.out.println("Cargo Code Valid: " + isCargoValid);
 
-        int count = 0;
-        int size = set.size();
-
-        for (String b : set) {
-            System.out.print(b);
-            count++;
-            if (count < size)
-                System.out.print(", ");
-        }
-
-        System.out.println(" }");
+        System.out.println("\nUC11 validation completed...");
     }
 }
