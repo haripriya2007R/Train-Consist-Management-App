@@ -1,12 +1,29 @@
+ UC12
+import java.util.*;
+
 UC11
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+ main
 
 import java.util.*;
 import java.util.stream.Collectors;
  main
 
 public class TrainConsistManagementApp {
+
+UC12
+    static class GoodsBogie {
+        String type;
+        String cargo;
+
+        GoodsBogie(String type, String cargo) {
+            this.type = type;
+            this.cargo = cargo;
+        }
+    }
+
+    public static void main(String[] args) {
 
     static class Bogie {
         String name;
@@ -24,28 +41,41 @@ public class TrainConsistManagementApp {
 UC11
         System.out.println("UC11 - Validate Train ID and Cargo Code");
         System.out.println("=================================");
+main
 
-        String trainId = "TRN-1234";
-        String cargoCode = "PET-AB";
+        System.out.println("==========================================");
+        System.out.println("UC12 - Safety Compliance Check for Goods Bogies");
+        System.out.println("==========================================");
 
-        String trainRegex = "TRN-\\d{4}";
-        String cargoRegex = "PET-[A-Z]{2}";
+       
+        List<GoodsBogie> bogies = new ArrayList<>();
 
-        Pattern trainPattern = Pattern.compile(trainRegex);
-        Pattern cargoPattern = Pattern.compile(cargoRegex);
+        bogies.add(new GoodsBogie("Cylindrical", "Petroleum"));
+        bogies.add(new GoodsBogie("Open", "Coal"));
+        bogies.add(new GoodsBogie("Box", "Grain"));
+        bogies.add(new GoodsBogie("Cylindrical", "Coal")); 
 
-        Matcher trainMatcher = trainPattern.matcher(trainId);
-        Matcher cargoMatcher = cargoPattern.matcher(cargoCode);
+        System.out.println("\nGoods Bogies in Train:");
+        for (GoodsBogie b : bogies) {
+            System.out.println(b.type + " -> " + b.cargo);
+        }
 
-        boolean isTrainValid = trainMatcher.matches();
-        boolean isCargoValid = cargoMatcher.matches();
+        boolean isSafe = bogies.stream()
+                .allMatch(b ->
+                        !b.type.equalsIgnoreCase("Cylindrical") ||
+                                b.cargo.equalsIgnoreCase("Petroleum")
+                );
 
-        System.out.println("\nEntered Train ID: " + trainId);
-        System.out.println("Entered Cargo Code: " + cargoCode);
+        System.out.println("\nSafety Compliance Status: " + isSafe);
 
-        System.out.println("\nValidation Results:");
-        System.out.println("Train ID Valid: " + isTrainValid);
-        System.out.println("Cargo Code Valid: " + isCargoValid);
+        if (isSafe) {
+            System.out.println("Train formation is SAFE.");
+        } else {
+            System.out.println("Train formation is NOT SAFE.");
+        }
+
+ UC12
+        System.out.println("\nUC12 safety validation completed...");
 
         System.out.println("\nUC11 validation completed...");
 
@@ -72,6 +102,7 @@ UC11
         System.out.println("\nTotal Seating Capacity of Train: " + totalCapacity);
 
         System.out.println("\nUC10 aggregation completed...");
+ main
  main
     }
 }
