@@ -1,3 +1,7 @@
+UC19
+import java.util.Arrays;
+
+
  UC18
 
  UC17
@@ -6,43 +10,75 @@ import java.util.Arrays;
  UC15
  main
  main
+ main
 public class TrainConsistManagementApp {
 
 UC16
     public static void main(String[] args) {
+
+ UC19
+        System.out.println("======================================");
+        System.out.println(" UC19 - Binary Search for Bogie ID ");
+        System.out.println("======================================\n");
 
         System.out.println("==========================================");
         System.out.println("UC18 - Linear Search for Bogie ID");
         System.out.println("==========================================\n");
 
 UC18
+ main
         String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
 
-        String searchId = "BG309";
 
-        System.out.println("Available Bogie IDs:");
+        Arrays.sort(bogieIds);
+
+
+        String key = "BG309";
+
+        System.out.println("Sorted Bogie IDs:");
         for (String id : bogieIds) {
             System.out.println(id);
         }
+
+ UC19
+        System.out.println();
+
+        int low = 0;
+        int high = bogieIds.length - 1;
 
  UC17
         String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
  main
 
+ main
         boolean found = false;
 
-        for (String id : bogieIds) {
-            if (id.equals(searchId)) {
+        while (low <= high) {
+
+            int mid = (low + high) / 2;
+
+            int result = key.compareTo(bogieIds[mid]);
+
+            if (result == 0) {
                 found = true;
-                break; // early termination
+                break;
+            }
+            else if (result < 0) {
+                high = mid - 1;
+            }
+            else {
+                low = mid + 1;
             }
         }
 
         if (found) {
-            System.out.println("\nBogie " + searchId + " found in train consist.");
+            System.out.println("Bogie " + key + " found using Binary Search.");
         } else {
-            System.out.println("\nBogie " + searchId + " NOT found in train consist.");
+            System.out.println("Bogie " + key + " not found.");
         }
+
+ UC19
+        System.out.println("\nUC19 search completed...");
 
  UC18
         System.out.println("\nUC18 search completed...");
@@ -261,6 +297,7 @@ UC15
  main
  main
 main
+ main
  main
  main
  main

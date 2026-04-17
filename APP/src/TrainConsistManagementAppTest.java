@@ -1,15 +1,40 @@
+ UC19
+
 UC17
 import org.junit.Test;
+ main
 import static org.junit.Assert.*;
+import org.junit.Test;
+import java.util.Arrays;
 
 public class TrainConsistManagementAppTest {
+
+ UC19
+    public boolean binarySearch(String[] bogieIds, String key) {
+
+        Arrays.sort(bogieIds);
+
+        int low = 0;
+        int high = bogieIds.length - 1;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+
+            int result = key.compareTo(bogieIds[mid]);
+
+            if (result == 0) {
 
  UC18
 
     private boolean linearSearch(String[] bogies, String key) {
         for (String id : bogies) {
             if (id.equals(key)) {
+ main
                 return true;
+            } else if (result < 0) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
             }
         }
         return false;
@@ -126,24 +151,47 @@ main
     }
 
     @Test
-    public void testSearch_BogieFound() {
-        String[] bogies = {"BG101","BG205","BG309","BG412","BG550"};
-        assertTrue(linearSearch(bogies, "BG309"));
+    public void testBinarySearch_BogieFound() {
+        String[] ids = {"BG101","BG205","BG309","BG412","BG550"};
+        assertTrue(binarySearch(ids, "BG309"));
     }
 
     @Test
-    public void testSearch_BogieNotFound() {
-        String[] bogies = {"BG101","BG205","BG309","BG412","BG550"};
-        assertFalse(linearSearch(bogies, "BG999"));
+    public void testBinarySearch_BogieNotFound() {
+        String[] ids = {"BG101","BG205","BG309","BG412","BG550"};
+        assertFalse(binarySearch(ids, "BG999"));
     }
 
     @Test
-    public void testSearch_FirstElementMatch() {
-        String[] bogies = {"BG101","BG205","BG309","BG412","BG550"};
-        assertTrue(linearSearch(bogies, "BG101"));
+    public void testBinarySearch_FirstElementMatch() {
+        String[] ids = {"BG101","BG205","BG309","BG412","BG550"};
+        assertTrue(binarySearch(ids, "BG101"));
     }
 
     @Test
+    public void testBinarySearch_LastElementMatch() {
+        String[] ids = {"BG101","BG205","BG309","BG412","BG550"};
+        assertTrue(binarySearch(ids, "BG550"));
+    }
+
+    @Test
+    public void testBinarySearch_SingleElementArray() {
+        String[] ids = {"BG101"};
+        assertTrue(binarySearch(ids, "BG101"));
+    }
+
+    @Test
+ UC19
+    public void testBinarySearch_EmptyArray() {
+        String[] ids = {};
+        assertFalse(binarySearch(ids, "BG101"));
+    }
+
+    @Test
+    public void testBinarySearch_UnsortedInputHandled() {
+        String[] ids = {"BG309","BG101","BG550","BG205","BG412"};
+        assertTrue(binarySearch(ids, "BG205"));
+
 UC18
     public void testSearch_LastElementMatch() {
         String[] bogies = {"BG101","BG205","BG309","BG412","BG550"};
@@ -324,6 +372,7 @@ UC13
 main
  main
 main
+ main
  main
     }
 }
