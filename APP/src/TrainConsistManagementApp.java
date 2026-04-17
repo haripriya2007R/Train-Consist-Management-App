@@ -1,12 +1,29 @@
+ UC17
+import java.util.Arrays;
+
  UC15
+ main
 public class TrainConsistManagementApp {
 
 UC16
     public static void main(String[] args) {
 
         System.out.println("==========================================");
-        System.out.println("UC16 - Manual Sorting using Bubble Sort");
+        System.out.println("UC17 - Sort Bogie Names using Arrays.sort()");
         System.out.println("==========================================\n");
+
+ UC17
+        String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
+
+        System.out.println("Original Bogie Names:");
+        System.out.println(Arrays.toString(bogieNames));
+
+        Arrays.sort(bogieNames);
+
+        System.out.println("\nSorted Bogie Names (Alphabetical):");
+        System.out.println(Arrays.toString(bogieNames));
+
+        System.out.println("\nUC17 sorting completed...");
 
         int[] capacities = {72, 56, 24, 70, 60};
 
@@ -220,6 +237,7 @@ UC15
  main
  main
 main
+ main
  main
  main
  main

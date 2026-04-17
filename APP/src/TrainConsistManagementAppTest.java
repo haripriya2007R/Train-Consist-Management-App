@@ -1,3 +1,11 @@
+UC17
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.Arrays;
+
+public class TrainConsistManagementAppTest {
+
+
 import org.junit.jupiter.api.Test;
  UC13
 
@@ -32,10 +40,16 @@ UC16
         return a;
     }
 
+ main
     @Test
-    void testSort_BasicSorting() {
-        int[] input = {72, 56, 24, 70, 60};
-        int[] expected = {24, 56, 60, 70, 72};
+    public void testSort_BasicAlphabeticalSorting() {
+        String[] bogies = {"Sleeper","AC Chair","First Class","General","Luxury"};
+
+ UC17
+        Arrays.sort(bogies);
+
+        String[] expected = {"AC Chair","First Class","General","Luxury","Sleeper"};
+        assertArrayEquals(expected, bogies);
 
 UC14
     @Test
@@ -98,33 +112,49 @@ main
  main
 
         assertArrayEquals(expected, bubbleSort(input));
+ main
     }
 
     @Test
-    void testSort_AlreadySortedArray() {
-        int[] input = {24, 56, 60, 70, 72};
-        int[] expected = {24, 56, 60, 70, 72};
+    public void testSort_UnsortedInput() {
+        String[] bogies = {"Luxury","General","Sleeper","AC Chair"};
 
-        assertArrayEquals(expected, bubbleSort(input));
+        Arrays.sort(bogies);
+
+        String[] expected = {"AC Chair","General","Luxury","Sleeper"};
+        assertArrayEquals(expected, bogies);
     }
 
     @Test
-    void testSort_DuplicateValues() {
-        int[] input = {72, 56, 56, 24};
-        int[] expected = {24, 56, 56, 72};
+    public void testSort_AlreadySortedArray() {
+        String[] bogies = {"AC Chair","First Class","General"};
 
-        assertArrayEquals(expected, bubbleSort(input));
+        Arrays.sort(bogies);
+
+        String[] expected = {"AC Chair","First Class","General"};
+        assertArrayEquals(expected, bogies);
     }
 
     @Test
-    void testSort_SingleElementArray() {
-        int[] input = {50};
-        int[] expected = {50};
+    public void testSort_DuplicateBogieNames() {
+        String[] bogies = {"Sleeper","AC Chair","Sleeper","General"};
 
-        assertArrayEquals(expected, bubbleSort(input));
+        Arrays.sort(bogies);
+
+        String[] expected = {"AC Chair","General","Sleeper","Sleeper"};
+        assertArrayEquals(expected, bogies);
     }
 
     @Test
+ UC17
+    public void testSort_SingleElementArray() {
+        String[] bogies = {"Sleeper"};
+
+        Arrays.sort(bogies);
+
+        String[] expected = {"Sleeper"};
+        assertArrayEquals(expected, bogies);
+
  UC16
     void testSort_AllEqualValues() {
         int[] input = {40, 40, 40};
@@ -284,5 +314,6 @@ UC13
  main
 main
  main
+main
     }
 }
