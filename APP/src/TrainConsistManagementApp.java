@@ -1,3 +1,5 @@
+ UC20
+
 UC19
 import java.util.Arrays;
 
@@ -11,10 +13,15 @@ import java.util.Arrays;
  main
  main
  main
+ main
 public class TrainConsistManagementApp {
 
 UC16
     public static void main(String[] args) {
+
+ UC20
+        System.out.println("UC20 - Exception Handling During Search");
+        System.out.println("--------------------------------------------------");
 
  UC19
         System.out.println("======================================");
@@ -31,14 +38,17 @@ UC18
 
 
         Arrays.sort(bogieIds);
+ main
 
+        String[] bogieIds = {};   // Change this to test other cases
 
-        String key = "BG309";
+        String searchId = "BG101";
 
-        System.out.println("Sorted Bogie IDs:");
-        for (String id : bogieIds) {
-            System.out.println(id);
+        if (bogieIds.length == 0) {
+            throw new IllegalStateException("No bogies available in train. Cannot perform search.");
         }
+
+ UC20
 
  UC19
         System.out.println();
@@ -51,31 +61,24 @@ UC18
  main
 
  main
+main
         boolean found = false;
 
-        while (low <= high) {
-
-            int mid = (low + high) / 2;
-
-            int result = key.compareTo(bogieIds[mid]);
-
-            if (result == 0) {
+        for (String id : bogieIds) {
+            if (id.equals(searchId)) {
                 found = true;
                 break;
-            }
-            else if (result < 0) {
-                high = mid - 1;
-            }
-            else {
-                low = mid + 1;
             }
         }
 
         if (found) {
-            System.out.println("Bogie " + key + " found using Binary Search.");
+            System.out.println("Bogie " + searchId + " found in train.");
         } else {
-            System.out.println("Bogie " + key + " not found.");
+            System.out.println("Bogie " + searchId + " NOT found in train.");
         }
+
+ UC20
+        System.out.println("\nUC20 execution completed...");
 
  UC19
         System.out.println("\nUC19 search completed...");
@@ -297,6 +300,7 @@ UC15
  main
  main
 main
+ main
  main
  main
  main
