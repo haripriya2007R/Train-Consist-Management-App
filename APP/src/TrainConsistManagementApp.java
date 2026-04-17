@@ -1,7 +1,10 @@
+ UC18
+
  UC17
 import java.util.Arrays;
 
  UC15
+ main
  main
 public class TrainConsistManagementApp {
 
@@ -9,19 +12,40 @@ UC16
     public static void main(String[] args) {
 
         System.out.println("==========================================");
-        System.out.println("UC17 - Sort Bogie Names using Arrays.sort()");
+        System.out.println("UC18 - Linear Search for Bogie ID");
         System.out.println("==========================================\n");
+
+UC18
+        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+
+        String searchId = "BG309";
+
+        System.out.println("Available Bogie IDs:");
+        for (String id : bogieIds) {
+            System.out.println(id);
+        }
 
  UC17
         String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
+ main
 
-        System.out.println("Original Bogie Names:");
-        System.out.println(Arrays.toString(bogieNames));
+        boolean found = false;
 
-        Arrays.sort(bogieNames);
+        for (String id : bogieIds) {
+            if (id.equals(searchId)) {
+                found = true;
+                break; // early termination
+            }
+        }
 
-        System.out.println("\nSorted Bogie Names (Alphabetical):");
-        System.out.println(Arrays.toString(bogieNames));
+        if (found) {
+            System.out.println("\nBogie " + searchId + " found in train consist.");
+        } else {
+            System.out.println("\nBogie " + searchId + " NOT found in train consist.");
+        }
+
+ UC18
+        System.out.println("\nUC18 search completed...");
 
         System.out.println("\nUC17 sorting completed...");
 
@@ -237,6 +261,7 @@ UC15
  main
  main
 main
+ main
  main
  main
  main
